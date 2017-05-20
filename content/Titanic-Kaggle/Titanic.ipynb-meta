@@ -5,4 +5,4 @@ Category: Machine Learning
 Tags: kaggle, machine-learning, python, random-forest, linear-svg, tpot, seaborn
 Author: Jason Reinhart
 Summary: This is my attempt at the introduction to machine learning Kaggle competition: "Titanic: Machine Learning from Disaster."
-Header_Cover: /theme/images/posts/Titanic-Kaggle/iceberg.jpg
+Header_Cover: /assets/images/titanic-kaggle/iceberg.jpg

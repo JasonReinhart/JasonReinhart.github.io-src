@@ -7,7 +7,9 @@ SITENAME = u'Jason Reinhart'
 SITESUBTITLE = u'Data Analysis, Visualization, and Machine Learning'
 SITEURL = ''
 
+
 PATH = 'content'
+
 
 TIMEZONE = 'America/Indiana/Indianapolis'
 
@@ -15,18 +17,18 @@ DEFAULT_LANG = u'en'
 
 LOAD_CONTENT_CACHE = False
 
-DISPLAY_PAGES_ON_MENU = True
-
 #Theme Settings
 THEME = "/Users/jreinhart/Documents/pelican_blog/pelican_themes/pelican-clean"
 MARKUP = ('md', 'ipynb')
-
+HEADER_COVER = "./assets/images/frontpageblur.jpg"
 
 #Plugin Settings
 PLUGIN_PATHS = ['./plugins']
 PLUGINS = [
 	'ipynb.markup'
 	]
+
+STATIC_PATHS = ['assets']
 
 #ipynb plugin settings
 IPYNB_USE_META_SUMMARY = True
@@ -38,6 +40,8 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+#Pages on Menu navigation
+DISPLAY_PAGES_ON_MENU = True
 
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
