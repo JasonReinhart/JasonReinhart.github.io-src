@@ -8,6 +8,7 @@ SITESUBTITLE = u'Data Analysis, Visualization, and Machine Learning'
 SITEURL = ''
 
 
+
 PATH = 'content'
 
 
@@ -20,7 +21,7 @@ LOAD_CONTENT_CACHE = False
 #Theme Settings
 THEME = "/Users/jreinhart/Documents/pelican_blog/pelican_themes/pelican-clean"
 MARKUP = ('md', 'ipynb')
-HEADER_COVER = "./assets/images/frontpageblur.jpg"
+HEADER_COVER = "/assets/images/frontpageblur.jpg"
 
 #Plugin Settings
 PLUGIN_PATHS = ['./plugins']
@@ -40,8 +41,17 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+#Fix Author Page Navigation
+AUTHOR_SAVE_AS = '{slug}.html'
+AUTHOR_URL = '{slug}.html'
+
 #Pages on Menu navigation
-DISPLAY_PAGES_ON_MENU = True
+DISPLAY_PAGES_ON_MENU = False
+DISPLAY_CATEGORIES_ON_MENU = False
+MENUITEMS = (
+	('About', 'about.html'),
+	('Resumé', 'resume.html')
+	)
 
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
