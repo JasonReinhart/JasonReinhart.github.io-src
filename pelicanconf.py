@@ -41,16 +41,16 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-#Fix Author Page Navigation
-AUTHOR_SAVE_AS = '{slug}.html'
-AUTHOR_URL = '{slug}.html'
+#URL Navigation
+PAGE_URL = '/{slug}.html'
+PAGE_SAVE_AS = '{slug}.html'
 
 #Pages on Menu navigation
 DISPLAY_PAGES_ON_MENU = False
 DISPLAY_CATEGORIES_ON_MENU = False
 MENUITEMS = (
-	('About', 'about.html'),
-	('Resumé', 'resume.html')
+	('About', '/about.html'),
+	('Resumé', '/resume.html')
 	)
 
 # Blogroll
