@@ -47,7 +47,7 @@ PAGE_SAVE_AS = '{slug}.html'
 
 #Pages on Menu navigation
 DISPLAY_PAGES_ON_MENU = False
-DISPLAY_CATEGORIES_ON_MENU = False
+DISPLAY_CATEGORIES_ON_MENU = True
 MENUITEMS = (
 	('About', '/about.html'),
 	('Resumé', '/resume.html')

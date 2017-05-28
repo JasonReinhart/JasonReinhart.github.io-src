@@ -78,6 +78,8 @@
                         <li><a href="/about.html">About</a></li>
                         <li><a href="/resume.html">Resumé</a></li>
 
+                                <li><a href="/category/analysis.html">Analysis</a></li>
+                                <li class="active"><a href="/category/machine-learning.html">Machine Learning</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -113,868 +115,7 @@
 *
 * IPython notebook
 *
-*/
-/* CSS font colors for translated ANSI colors. */
-.ansibold {
-  font-weight: bold;
-}
-/* use dark versions for foreground, to improve visibility */
-.ansiblack {
-  color: black;
-}
-.ansired {
-  color: darkred;
-}
-.ansigreen {
-  color: darkgreen;
-}
-.ansiyellow {
-  color: #c4a000;
-}
-.ansiblue {
-  color: darkblue;
-}
-.ansipurple {
-  color: darkviolet;
-}
-.ansicyan {
-  color: steelblue;
-}
-.ansigray {
-  color: gray;
-}
-/* and light for background, for the same reason */
-.ansibgblack {
-  background-color: black;
-}
-.ansibgred {
-  background-color: red;
-}
-.ansibggreen {
-  background-color: green;
-}
-.ansibgyellow {
-  background-color: yellow;
-}
-.ansibgblue {
-  background-color: blue;
-}
-.ansibgpurple {
-  background-color: magenta;
-}
-.ansibgcyan {
-  background-color: cyan;
-}
-.ansibggray {
-  background-color: gray;
-}
-div.cell {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  border-radius: 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-  width: 100%;
-  padding: 5px;
-  /* This acts as a spacer between cells, that is outside the border */
-  margin: 0px;
-  outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
-}
-div.cell.jupyter-soft-selected {
-  border-left-color: #90CAF9;
-  border-left-color: #E3F2FD;
-  border-left-width: 1px;
-  padding-left: 5px;
-  border-right-color: #E3F2FD;
-  border-right-width: 1px;
-  background: #E3F2FD;
-}
-@media print {
-  div.cell.jupyter-soft-selected {
-    border-color: transparent;
-  }
-}
-div.cell.selected {
-  border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
-}
-@media print {
-  div.cell.selected {
-    border-color: transparent;
-  }
-}
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
-}
-.edit_mode div.cell.selected {
-  border-color: #66BB6A;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
-}
-@media print {
-  .edit_mode div.cell.selected {
-    border-color: transparent;
-  }
-}
-.prompt {
-  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
-  min-width: 14ex;
-  /* This padding is tuned to match the padding on the CodeMirror editor. */
-  padding: 0.4em;
-  margin: 0px;
-  font-family: monospace;
-  text-align: right;
-  /* This has to match that of the the CodeMirror class line-height below */
-  line-height: 1.21429em;
-  /* Don't highlight prompt number selection */
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  /* Use default cursor */
-  cursor: default;
-}
-@media (max-width: 540px) {
-  .prompt {
-    text-align: left;
-  }
-}
-div.inner_cell {
-  min-width: 0;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  /* Old browsers */
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-  /* Modern browsers */
-  flex: 1;
-}
-/* input_area and input_prompt must match in top border and margin for alignment */
-div.input_area {
-  border: 1px solid #cfcfcf;
-  border-radius: 2px;
-  background: #f7f7f7;
-  line-height: 1.21429em;
-}
-/* This is needed so that empty prompt areas can collapse to zero height when there
-   is no content in the output_subarea and the prompt. The main purpose of this is
-   to make sure that empty JavaScript output_subareas have no height. */
-div.prompt:empty {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-div.unrecognized_cell {
-  padding: 5px 5px 5px 0px;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-div.unrecognized_cell .inner_cell {
-  border-radius: 2px;
-  padding: 5px;
-  font-weight: bold;
-  color: red;
-  border: 1px solid #cfcfcf;
-  background: #eaeaea;
-}
-div.unrecognized_cell .inner_cell a {
-  color: inherit;
-  text-decoration: none;
-}
-div.unrecognized_cell .inner_cell a:hover {
-  color: inherit;
-  text-decoration: none;
-}
-@media (max-width: 540px) {
-  div.unrecognized_cell > div.prompt {
-    display: none;
-  }
-}
-div.code_cell {
-  /* avoid page breaking on code cells when printing */
-}
-@media print {
-  div.code_cell {
-    page-break-inside: avoid;
-  }
-}
-/* any special styling for code cells that are currently running goes here */
-div.input {
-  page-break-inside: avoid;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-@media (max-width: 540px) {
-  div.input {
-    /* Old browsers */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-align: stretch;
-    display: -moz-box;
-    -moz-box-orient: vertical;
-    -moz-box-align: stretch;
-    display: box;
-    box-orient: vertical;
-    box-align: stretch;
-    /* Modern browsers */
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-/* input_area and input_prompt must match in top border and margin for alignment */
-div.input_prompt {
-  color: #303F9F;
-  border-top: 1px solid transparent;
-}
-div.input_area > div.highlight {
-  margin: 0.4em;
-  border: none;
-  padding: 0px;
-  background-color: transparent;
-}
-div.input_area > div.highlight > pre {
-  margin: 0px;
-  border: none;
-  padding: 0px;
-  background-color: transparent;
-}
-/* The following gets added to the <head> if it is detected that the user has a
- * monospace font with inconsistent normal/bold/italic height.  See
- * notebookmain.js.  Such fonts will have keywords vertically offset with
- * respect to the rest of the text.  The user should select a better font.
- * See: https://github.com/ipython/ipython/issues/1503
- *
- * .CodeMirror span {
- *      vertical-align: bottom;
- * }
- */
-.CodeMirror {
-  line-height: 1.21429em;
-  /* Changed from 1em to our global default */
-  font-size: 14px;
-  height: auto;
-  /* Changed to auto to autogrow */
-  background: none;
-  /* Changed from white to allow our bg to show through */
-}
-.CodeMirror-scroll {
-  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
-  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
-  overflow-y: hidden;
-  overflow-x: auto;
-}
-.CodeMirror-lines {
-  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
-  /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
-}
-.CodeMirror-linenumber {
-  padding: 0 8px 0 4px;
-}
-.CodeMirror-gutters {
-  border-bottom-left-radius: 2px;
-  border-top-left-radius: 2px;
-}
-.CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-}
-/*
-
-Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
-Adapted from GitHub theme
-
-*/
-.highlight-base {
-  color: #000;
-}
-.highlight-variable {
-  color: #000;
-}
-.highlight-variable-2 {
-  color: #1a1a1a;
-}
-.highlight-variable-3 {
-  color: #333333;
-}
-.highlight-string {
-  color: #BA2121;
-}
-.highlight-comment {
-  color: #408080;
-  font-style: italic;
-}
-.highlight-number {
-  color: #080;
-}
-.highlight-atom {
-  color: #88F;
-}
-.highlight-keyword {
-  color: #008000;
-  font-weight: bold;
-}
-.highlight-builtin {
-  color: #008000;
-}
-.highlight-error {
-  color: #f00;
-}
-.highlight-operator {
-  color: #AA22FF;
-  font-weight: bold;
-}
-.highlight-meta {
-  color: #AA22FF;
-}
-/* previously not defined, copying from default codemirror */
-.highlight-def {
-  color: #00f;
-}
-.highlight-string-2 {
-  color: #f50;
-}
-.highlight-qualifier {
-  color: #555;
-}
-.highlight-bracket {
-  color: #997;
-}
-.highlight-tag {
-  color: #170;
-}
-.highlight-attribute {
-  color: #00c;
-}
-.highlight-header {
-  color: blue;
-}
-.highlight-quote {
-  color: #090;
-}
-.highlight-link {
-  color: #00c;
-}
-/* apply the same style to codemirror */
-.cm-s-ipython span.cm-keyword {
-  color: #008000;
-  font-weight: bold;
-}
-.cm-s-ipython span.cm-atom {
-  color: #88F;
-}
-.cm-s-ipython span.cm-number {
-  color: #080;
-}
-.cm-s-ipython span.cm-def {
-  color: #00f;
-}
-.cm-s-ipython span.cm-variable {
-  color: #000;
-}
-.cm-s-ipython span.cm-operator {
-  color: #AA22FF;
-  font-weight: bold;
-}
-.cm-s-ipython span.cm-variable-2 {
-  color: #1a1a1a;
-}
-.cm-s-ipython span.cm-variable-3 {
-  color: #333333;
-}
-.cm-s-ipython span.cm-comment {
-  color: #408080;
-  font-style: italic;
-}
-.cm-s-ipython span.cm-string {
-  color: #BA2121;
-}
-.cm-s-ipython span.cm-string-2 {
-  color: #f50;
-}
-.cm-s-ipython span.cm-meta {
-  color: #AA22FF;
-}
-.cm-s-ipython span.cm-qualifier {
-  color: #555;
-}
-.cm-s-ipython span.cm-builtin {
-  color: #008000;
-}
-.cm-s-ipython span.cm-bracket {
-  color: #997;
-}
-.cm-s-ipython span.cm-tag {
-  color: #170;
-}
-.cm-s-ipython span.cm-attribute {
-  color: #00c;
-}
-.cm-s-ipython span.cm-header {
-  color: blue;
-}
-.cm-s-ipython span.cm-quote {
-  color: #090;
-}
-.cm-s-ipython span.cm-link {
-  color: #00c;
-}
-.cm-s-ipython span.cm-error {
-  color: #f00;
-}
-.cm-s-ipython span.cm-tab {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
-  background-position: right;
-  background-repeat: no-repeat;
-}
-div.output_wrapper {
-  /* this position must be relative to enable descendents to be absolute within it */
-  position: relative;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  z-index: 1;
-}
-/* class for the output area when it should be height-limited */
-div.output_scroll {
-  /* ideally, this would be max-height, but FF barfs all over that */
-  height: 24em;
-  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
-  width: 100%;
-  overflow: auto;
-  border-radius: 2px;
-  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
-  display: block;
-}
-/* output div while it is collapsed */
-div.output_collapsed {
-  margin: 0px;
-  padding: 0px;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-div.out_prompt_overlay {
-  height: 100%;
-  padding: 0px 0.4em;
-  position: absolute;
-  border-radius: 2px;
-}
-div.out_prompt_overlay:hover {
-  /* use inner shadow to get border that is computed the same on WebKit/FF */
-  -webkit-box-shadow: inset 0 0 1px #000;
-  box-shadow: inset 0 0 1px #000;
-  background: rgba(240, 240, 240, 0.5);
-}
-div.output_prompt {
-  color: #D84315;
-}
-/* This class is the outer container of all output sections. */
-div.output_area {
-  padding: 0px;
-  page-break-inside: avoid;
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-div.output_area .MathJax_Display {
-  text-align: left !important;
-}
-div.output_area 
-div.output_area 
-div.output_area img,
-div.output_area svg {
-  max-width: 100%;
-  height: auto;
-}
-div.output_area img.unconfined,
-div.output_area svg.unconfined {
-  max-width: none;
-}
-/* This is needed to protect the pre formating from global settings such
-   as that of bootstrap */
-.output {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: vertical;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-@media (max-width: 540px) {
-  div.output_area {
-    /* Old browsers */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-align: stretch;
-    display: -moz-box;
-    -moz-box-orient: vertical;
-    -moz-box-align: stretch;
-    display: box;
-    box-orient: vertical;
-    box-align: stretch;
-    /* Modern browsers */
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-div.output_area pre {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  vertical-align: baseline;
-  color: black;
-  background-color: transparent;
-  border-radius: 0;
-}
-/* This class is for the output subarea inside the output_area and after
-   the prompt div. */
-div.output_subarea {
-  overflow-x: auto;
-  padding: 0.4em;
-  /* Old browsers */
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-  /* Modern browsers */
-  flex: 1;
-  max-width: calc(100% - 14ex);
-}
-div.output_scroll div.output_subarea {
-  overflow-x: visible;
-}
-/* The rest of the output_* classes are for special styling of the different
-   output types */
-/* all text output has this class: */
-div.output_text {
-  text-align: left;
-  color: #000;
-  /* This has to match that of the the CodeMirror class line-height below */
-  line-height: 1.21429em;
-}
-/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
-div.output_stderr {
-  background: #fdd;
-  /* very light red background for stderr */
-}
-div.output_latex {
-  text-align: left;
-}
-/* Empty output_javascript divs should have no height */
-div.output_javascript:empty {
-  padding: 0;
-}
-.js-error {
-  color: darkred;
-}
-/* raw_input styles */
-div.raw_input_container {
-  line-height: 1.21429em;
-  padding-top: 5px;
-}
-pre.raw_input_prompt {
-  /* nothing needed here. */
-}
-input.raw_input {
-  font-family: monospace;
-  font-size: inherit;
-  color: inherit;
-  width: auto;
-  /* make sure input baseline aligns with prompt */
-  vertical-align: baseline;
-  /* padding + margin = 0.5em between prompt and cursor */
-  padding: 0em 0.25em;
-  margin: 0em 0.25em;
-}
-input.raw_input:focus {
-  box-shadow: none;
-}
-p.p-space {
-  margin-bottom: 10px;
-}
-div.output_unrecognized {
-  padding: 5px;
-  font-weight: bold;
-  color: red;
-}
-div.output_unrecognized a {
-  color: inherit;
-  text-decoration: none;
-}
-div.output_unrecognized a:hover {
-  color: inherit;
-  text-decoration: none;
-}
-.rendered_html {
-  color: #000;
-  /* any extras will just be numbers: */
-}
-
-
-
-.rendered_html :link {
-  text-decoration: underline;
-}
-.rendered_html :visited {
-  text-decoration: underline;
-}
-
-
-
-
-
-
-.rendered_html h1:first-child {
-  margin-top: 0.538em;
-}
-.rendered_html h2:first-child {
-  margin-top: 0.636em;
-}
-.rendered_html h3:first-child {
-  margin-top: 0.777em;
-}
-.rendered_html h4:first-child {
-  margin-top: 1em;
-}
-.rendered_html h5:first-child {
-  margin-top: 1em;
-}
-.rendered_html h6:first-child {
-  margin-top: 1em;
-}
-
-
-
-
-
-
-
-
-.rendered_html * + ul {
-  margin-top: 1em;
-}
-.rendered_html * + ol {
-  margin-top: 1em;
-}
-
-
-.rendered_html pre,
-
-
-
-.rendered_html tr,
-.rendered_html th,
-
-.rendered_html td,
-
-
-.rendered_html * + table {
-  margin-top: 1em;
-}
-
-.rendered_html * + p {
-  margin-top: 1em;
-}
-
-.rendered_html * + img {
-  margin-top: 1em;
-}
-.rendered_html img,
-
-.rendered_html img.unconfined,
-
-div.text_cell {
-  /* Old browsers */
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  display: box;
-  box-orient: horizontal;
-  box-align: stretch;
-  /* Modern browsers */
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-@media (max-width: 540px) {
-  div.text_cell > div.prompt {
-    display: none;
-  }
-}
-div.text_cell_render {
-  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
-  outline: none;
-  resize: none;
-  width: inherit;
-  border-style: none;
-  padding: 0.5em 0.5em 0.5em 0.4em;
-  color: #000;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-a.anchor-link:link {
-  text-decoration: none;
-  padding: 0px 20px;
-  visibility: hidden;
-}
-h1:hover .anchor-link,
-h2:hover .anchor-link,
-h3:hover .anchor-link,
-h4:hover .anchor-link,
-h5:hover .anchor-link,
-h6:hover .anchor-link {
-  visibility: visible;
-}
-.text_cell.rendered .input_area {
-  display: none;
-}
-.text_cell.rendered 
-.text_cell.unrendered .text_cell_render {
-  display: none;
-}
-.cm-header-1,
-.cm-header-2,
-.cm-header-3,
-.cm-header-4,
-.cm-header-5,
-.cm-header-6 {
-  font-weight: bold;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.cm-header-1 {
-  font-size: 185.7%;
-}
-.cm-header-2 {
-  font-size: 157.1%;
-}
-.cm-header-3 {
-  font-size: 128.6%;
-}
-.cm-header-4 {
-  font-size: 110%;
-}
-.cm-header-5 {
-  font-size: 100%;
-  font-style: italic;
-}
-.cm-header-6 {
-  font-size: 100%;
-  font-style: italic;
-}
-</style>
+*/.ansibold{font-weight:700}.ansiblack{}.ansired{color:#8b0000}.ansigreen{6400}.ansiyellow{color:#c4a000}.ansiblue{8b}.ansipurple{color:#9400d3}.ansicyan{color:#4682b4}.ansigray{color:gray}.ansibgblack{background-}.ansibgred{background-color:red}.ansibggreen{background-color:green}.ansibgyellow{background-color:#ff0}.ansibgblue{background-f}.ansibgpurple{background-color:#ff00ff}.ansibgcyan{background-ff}.ansibggray{background-color:gray}div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;display:-moz-box;-moz-box-orient:vertical;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;border-radius:2px;box-sizing:border-box;-moz-box-sizing:border-box;border-width:thin;border-style:solid;width:100%;padding:5px;margin:0;outline:0}div.cell.selected{border-color:#ababab}@media print{div.cell.selected{border-color:transparent}}.edit_mode div.cell.selected{border-color:green}.prompt{min-width:14ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;display:-moz-box;-moz-box-orient:vertical;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}@-moz-document url-prefix(){div.inner_cell{overflow-x:hidden}}div.input_area{border:1px solid #cfcfcf;border-radius:2px;background:#f7f7f7;line-height:1.21429em}div.prompt:empty{padding-top:0;padding-bottom:0}div.unrecognized_cell{padding:5px 5px 5px 0;display:-webkit-box;-webkit-box-orient:horizontal;display:-moz-box;-moz-box-orient:horizontal;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}div.unrecognized_cell .inner_cell{border-radius:2px;padding:5px;font-weight:700;color:red;border:1px solid #cfcfcf;background:#eaeaea}div.unrecognized_cell .inner_cell a,div.unrecognized_cell .inner_cell a:hover{color:inherit;text-decoration:none}@media (max-width:540px){.prompt{text-align:left}div.unrecognized_cell>div.prompt{display:none}}div.code_cell{}div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;display:-moz-box;-moz-box-orient:horizontal;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}@media (max-width:540px){div.input{-webkit-box-orient:vertical;-moz-box-orient:vertical;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}}div.input_prompt{color:navy;border-top:1px solid transparent}div.input_area>div.highlight{margin:.4em;border:none;padding:0;background-color:transparent}div.input_area>div.highlight>pre{margin:0;border:none;padding:0;background-color:transparent}.CodeMirror{line-height:1.21429em;font-size:14px;height:auto;background:0 0}.CodeMirror-scroll{overflow-y:hidden;overflow-x:auto}.CodeMirror-lines{padding:.4em}.CodeMirror-linenumber{padding:0 8px 0 4px}.CodeMirror-gutters{border-bottom-left-radius:2px;border-top-left-radius:2px}.CodeMirror pre{padding:0;border:0;border-radius:0}.highlight-base,.highlight-variable{}.highlight-variable-2{color:#1a1a1a}.highlight-variable-3{color:#333}.highlight-string{color:#BA2121}.highlight-comment{color:#408080;font-style:italic}.highlight-number{80}.highlight-atom{color:#88F}.highlight-keyword{color:green;font-weight:700}.highlight-builtin{color:green}.highlight-error{color:red}.highlight-operator{color:#A2F;font-weight:700}.highlight-meta{color:#A2F}.highlight-def{f}.highlight-string-2{color:#f50}.highlight-qualifier{color:#555}.highlight-bracket{color:#997}.highlight-tag{color:#170}.highlight-attribute{c}.highlight-header{f}.highlight-quote{90}.highlight-link{c}.cm-s-ipython span.cm-keyword{color:green;font-weight:700}.cm-s-ipython span.cm-atom{color:#88F}.cm-s-ipython span.cm-number{80}.cm-s-ipython span.cm-def{f}.cm-s-ipython span.cm-variable{}.cm-s-ipython span.cm-operator{color:#A2F;font-weight:700}.cm-s-ipython span.cm-variable-2{color:#1a1a1a}.cm-s-ipython span.cm-variable-3{color:#333}.cm-s-ipython span.cm-comment{color:#408080;font-style:italic}.cm-s-ipython span.cm-string{color:#BA2121}.cm-s-ipython span.cm-string-2{color:#f50}.cm-s-ipython span.cm-meta{color:#A2F}.cm-s-ipython span.cm-qualifier{color:#555}.cm-s-ipython span.cm-builtin{color:green}.cm-s-ipython span.cm-bracket{color:#997}.cm-s-ipython span.cm-tag{color:#170}.cm-s-ipython span.cm-attribute{c}.cm-s-ipython span.cm-header{f}.cm-s-ipython span.cm-quote{90}.cm-s-ipython span.cm-link{c}.cm-s-ipython span.cm-error{color:red}.cm-s-ipython span.cm-tab{background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=')right no-repeat}div.output_wrapper{display:-webkit-box;-webkit-box-align:stretch;display:-moz-box;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;z-index:1}div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:2px;-webkit-box-shadow:inset 0 2px 8px rgba(0,0,0,.8);box-shadow:inset 0 2px 8px rgba(0,0,0,.8);display:block}div.output_collapsed{margin:0;padding:0;display:-webkit-box;-webkit-box-orient:vertical;display:-moz-box;-moz-box-orient:vertical;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.out_prompt_overlay{height:100%;padding:0 .4em;position:absolute;border-radius:2px}div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000;box-shadow:inset 0 0 1px #000;background:rgba(240,240,240,.5)}div.output_prompt{color:#8b0000}div.output_area{padding:0;page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;display:-moz-box;-moz-box-orient:horizontal;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}div.output_area .MathJax_Display{text-align:left!important}div.output_area div.output_area img,div.output_area svg{max-width:100%;height:auto}div.output_area img.unconfined,div.output_area svg.unconfined{max-width:none}.output{display:-webkit-box;-webkit-box-orient:vertical;display:-moz-box;-moz-box-orient:vertical;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}@media (max-width:540px){div.output_area{-webkit-box-orient:vertical;-moz-box-orient:vertical;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}}div.output_area pre{margin:0;padding:0;border:0;vertical-align:baseline;background-color:transparent;border-radius:0}div.output_subarea{overflow-x:auto;padding:.4em;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1;max-width:calc(100% - 14ex)}div.output_text{text-align:left;line-height:1.21429em}div.output_stderr{background:#fdd}div.output_latex{text-align:left}div.output_javascript:empty{padding:0}.js-error{color:#8b0000}div.raw_input_container{font-family:monospace;padding-top:5px}span.raw_input_prompt{}input.raw_input{font-family:inherit;font-size:inherit;color:inherit;width:auto;vertical-align:baseline;padding:0 .25em;margin:0 .25em}input.raw_input:focus{box-shadow:none}p.p-space{margin-bottom:10px}div.output_unrecognized{padding:5px;font-weight:700;color:red}div.output_unrecognized a,div.output_unrecognized a:hover{color:inherit;text-decoration:none}.rendered_html{}.rendered_html :link,.rendered_html :visited,.rendered_html h1:first-child{margin-top:.538em}.rendered_html h2:first-child{margin-top:.636em}.rendered_html h3:first-child{margin-top:.777em}.rendered_html h4:first-child,.rendered_html h5:first-child,.rendered_html h6:first-child{margin-top:1em}.rendered_html *+ol,.rendered_html *+ul{margin-top:1em}.rendered_html *+table{margin-top:1em}.rendered_html *+p{margin-top:1em}.rendered_html *+img{margin-top:1em}div.text_cell{display:-webkit-box;-webkit-box-orient:horizontal;display:-moz-box;-moz-box-orient:horizontal;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}@media (max-width:540px){div.text_cell>div.prompt{display:none}}div.text_cell_render{outline:0;resize:none;width:inherit;border-style:none;padding:.5em .5em .5em .4em;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}a.anchor-link:link{text-decoration:none;padding:0 20px;visibility:hidden}h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible}.text_cell.rendered .input_area{display:none}.text_cell.rendered .text_cell.unrendered .text_cell_render{display:none}.cm-header-1,.cm-header-2,.cm-header-3,.cm-header-4,.cm-header-5,.cm-header-6{font-weight:700;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}.cm-header-1{font-size:185.7%}.cm-header-2{font-size:157.1%}.cm-header-3{font-size:128.6%}.cm-header-4{font-size:110%}.cm-header-5,.cm-header-6{font-size:100%;font-style:italic}</style>
 <style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight  { background: #f8f8f8; }
 .highlight .c { color: #408080; font-style: italic } /* Comment */
@@ -1024,10 +165,8 @@ h6:hover .anchor-link {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
-.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -1038,49 +177,10 @@ h6:hover .anchor-link {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
-.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
-<style type="text/css">
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-</style>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1135,8 +235,7 @@ h6:hover .anchor-link {
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -1341,8 +440,7 @@ the definitions do not support such relations.</p>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -1459,8 +557,7 @@ the definitions do not support such relations.</p>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -1584,8 +681,7 @@ the definitions do not support such relations.</p>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAV0AAABGCAYAAABv7kdbAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAAXpJREFUeJzt2EFNQ0EARdFfQqiASmglAAaoBkTggLAmOEAEGooBsFAk
@@ -1624,8 +720,7 @@ KSykUQAAAABJRU5ErkJggg==
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAo0AAAHSCAYAAACJnfHyAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3X+U1nWd///HKIPiMBga7SYSa7k4IvHTY4Fb57PqQLmT
@@ -1827,8 +922,7 @@ AAAASUVORK5CYII=
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAokAAAHSCAYAAACAdlGIAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3X1UVXWi//HP4dk8CPhUHmIcdW4gPqSgFJnlQ2oleH2K
@@ -2089,8 +1183,7 @@ HQwlEQAAAAaekwgAAAADJREAAAAGSiIAAAAMlEQAAAAYKIkAAAAwUBIBAABgoCQCAADAQEkEAACA
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqIAAAHMCAYAAAAOF8pEAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3WdgFNXawPH/tvRKeggplBBCDb2EDgGkSS/SQUBAUAER
@@ -3182,8 +2275,7 @@ kSQYRImIiIhIEv8fOcTzXJevwfoAAAAASUVORK5CYII=
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAokAAAHSCAYAAACAdlGIAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3Xd8FGXiBvBndrO7SXbTgFACAREkASRIAlFEaugEklBC
@@ -3609,8 +2701,7 @@ BoREAAAAGBASAQAAYPD/5yk9OzDbNmAAAAAASUVORK5CYII=
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>PassengerId      0
 Survived         0
@@ -3668,8 +2759,7 @@ dtype: int64
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -3786,8 +2876,7 @@ dtype: int64
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -3904,8 +2993,7 @@ dtype: int64
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>Age             263
 Cabin          1014
@@ -3953,8 +3041,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -4081,8 +3168,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAokAAAHSCAYAAACAdlGIAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3Xl0lFWCxuG3slQCJJBAAAmmUegxIexhaREQXJBWUjQo
@@ -4339,8 +3425,7 @@ AAAGSiIAAAAMlEQAAAAYKIkAAAAwUBIBAABgoCQCAADA8P9uAEYnAk0BdwAAAABJRU5ErkJggg==
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[17]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -4457,8 +3542,7 @@ AAAGSiIAAAAMlEQAAAAYKIkAAAAwUBIBAABgoCQCAADA8P9uAEYnAk0BdwAAAABJRU5ErkJggg==
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[18]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>Age            263
 Cabin            0
@@ -4500,8 +3584,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAApUAAAHSCAYAAAC95DDuAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3X2U1nWd//HXyAwIAyio6YpIZuEIioBmgppbMuApNvy5
@@ -4718,8 +3801,7 @@ KgEAKExUAgBQmKgEAKAwUQkAQGH/D9q88I8LbY26AAAAAElFTkSuQmCC
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[21]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>Age            263
 Cabin            0
@@ -4760,8 +3842,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[22]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -4828,8 +3909,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[23]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -5058,8 +4138,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[24]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[24]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>Age            263
 Cabin            0
@@ -5122,8 +4201,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[26]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -5307,8 +4385,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[27]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[27]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -5481,15 +4558,14 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[28]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[28]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>Index([u'Age', u'Fare', u'Name', u'Parch', u'PassengerId', u'Sex', u'SibSp',
-       u'Survived', u'Ticket', u'Cabin_A', u'Cabin_B', u'Cabin_C', u'Cabin_D',
-       u'Cabin_E', u'Cabin_F', u'Cabin_G', u'Cabin_T', u'Cabin_U',
-       u'Embarked_C', u'Embarked_Q', u'Embarked_S', u'Pclass_1', u'Pclass_2',
-       u'Pclass_3', u'Party_Size', u'Solo', u'SmallFam', u'LargeFam'],
-      dtype='object')</pre>
+<pre>Index([u&apos;Age&apos;, u&apos;Fare&apos;, u&apos;Name&apos;, u&apos;Parch&apos;, u&apos;PassengerId&apos;, u&apos;Sex&apos;, u&apos;SibSp&apos;,
+       u&apos;Survived&apos;, u&apos;Ticket&apos;, u&apos;Cabin_A&apos;, u&apos;Cabin_B&apos;, u&apos;Cabin_C&apos;, u&apos;Cabin_D&apos;,
+       u&apos;Cabin_E&apos;, u&apos;Cabin_F&apos;, u&apos;Cabin_G&apos;, u&apos;Cabin_T&apos;, u&apos;Cabin_U&apos;,
+       u&apos;Embarked_C&apos;, u&apos;Embarked_Q&apos;, u&apos;Embarked_S&apos;, u&apos;Pclass_1&apos;, u&apos;Pclass_2&apos;,
+       u&apos;Pclass_3&apos;, u&apos;Party_Size&apos;, u&apos;Solo&apos;, u&apos;SmallFam&apos;, u&apos;LargeFam&apos;],
+      dtype=&apos;object&apos;)</pre>
 </div>
 </div>
 </div>
@@ -5508,8 +4584,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAokAAAHTCAYAAABLKoItAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3X1YVHXC//HP8KwMCCpaY6yZFeOzgg+RWpqpm4FZKqVZ
@@ -5832,8 +4907,7 @@ TxMSAQBIfC1dAAAAv4+QCABAQkgEACAhJAIAkBASAQBIfANn28mjT1y8GQAAAABJRU5ErkJggg==
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[31]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[31]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -6125,12 +5199,11 @@ TxMSAQBIfC1dAAAAv4+QCABAQkgEACAhJAIAkBASAQBIfANn28mjT1y8GQAAAABJRU5ErkJggg==
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[34]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[34]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>KNeighborsRegressor(algorithm='auto', leaf_size=30, metric='minkowski',
+<pre>KNeighborsRegressor(algorithm=&apos;auto&apos;, leaf_size=30, metric=&apos;minkowski&apos;,
           metric_params=None, n_jobs=1, n_neighbors=2, p=2,
-          weights='uniform')</pre>
+          weights=&apos;uniform&apos;)</pre>
 </div>
 </div>
 </div>
@@ -6160,8 +5233,7 @@ TxMSAQBIfC1dAAAAv4+QCABAQkgEACAhJAIAkBASAQBIfANn28mjT1y8GQAAAABJRU5ErkJggg==
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[36]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[36]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>6.0</pre>
 </div>
@@ -6191,8 +5263,7 @@ TxMSAQBIfC1dAAAAv4+QCABAQkgEACAhJAIAkBASAQBIfANn28mjT1y8GQAAAABJRU5ErkJggg==
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[ 19.5  36.5  26.5  26.5  27.5  50.5   4.   31.5  19.    2.5]
 [ 22.  38.  26.  35.  35.  54.   2.  27.  14.   4.]
@@ -6224,8 +5295,7 @@ TxMSAQBIfC1dAAAAv4+QCABAQkgEACAhJAIAkBASAQBIfANn28mjT1y8GQAAAABJRU5ErkJggg==
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[38]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[38]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>array([ 29.75 ,  33.5  ,  27.5  ,  34.   ,  17.5  ,  19.   ,  31.5  ,
         17.5  ,  34.   ,  34.   ,  29.75 ,  30.75 ,  17.5  ,  22.5  ,
@@ -6282,15 +5352,14 @@ TxMSAQBIfC1dAAAAv4+QCABAQkgEACAhJAIAkBASAQBIfANn28mjT1y8GQAAAABJRU5ErkJggg==
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>/Applications/anaconda/lib/python2.7/site-packages/ipykernel/__main__.py:1: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
-  if __name__ == '__main__':
+  if __name__ == &apos;__main__&apos;:
 </pre>
 </div>
 </div>
@@ -6309,8 +5378,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[40]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[40]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -7846,8 +6914,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[42]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[42]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>Age              0
 Fare             0
@@ -7897,8 +6964,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[43]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[43]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -8094,8 +7160,7 @@ dtype: int64</pre>
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The cross validation scores are: [ 0.75757576  0.82828283  0.81481481]
 Precision: 0.740853658537
@@ -8130,14 +7195,13 @@ The F1 score is: 0.725373134328
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Index([u'Age', u'Fare', u'Parch', u'Sex', u'SibSp', u'Cabin_A', u'Cabin_B',
-       u'Cabin_C', u'Cabin_D', u'Cabin_E', u'Cabin_F', u'Cabin_G', u'Cabin_T',
-       u'Cabin_U', u'Embarked_C', u'Embarked_Q', u'Embarked_S', u'Pclass_1',
-       u'Pclass_2', u'Pclass_3', u'Solo', u'SmallFam', u'LargeFam'],
-      dtype='object')
+<pre>Index([u&apos;Age&apos;, u&apos;Fare&apos;, u&apos;Parch&apos;, u&apos;Sex&apos;, u&apos;SibSp&apos;, u&apos;Cabin_A&apos;, u&apos;Cabin_B&apos;,
+       u&apos;Cabin_C&apos;, u&apos;Cabin_D&apos;, u&apos;Cabin_E&apos;, u&apos;Cabin_F&apos;, u&apos;Cabin_G&apos;, u&apos;Cabin_T&apos;,
+       u&apos;Cabin_U&apos;, u&apos;Embarked_C&apos;, u&apos;Embarked_Q&apos;, u&apos;Embarked_S&apos;, u&apos;Pclass_1&apos;,
+       u&apos;Pclass_2&apos;, u&apos;Pclass_3&apos;, u&apos;Solo&apos;, u&apos;SmallFam&apos;, u&apos;LargeFam&apos;],
+      dtype=&apos;object&apos;)
 
 Feature ranking:
 1. feature 0 (0.264983)
@@ -8192,8 +7256,7 @@ Feature ranking:
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[47]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[47]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>array([ 0.,  0.,  0.,  1.,  0.,  0.,  0.,  0.,  1.,  0.,  0.,  0.,  1.,
         0.,  1.,  1.,  0.,  1.,  0.,  1.,  0.,  1.,  1.,  0.,  1.,  0.,
@@ -8247,8 +7310,7 @@ Feature ranking:
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[48]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[48]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -8328,8 +7390,7 @@ Feature ranking:
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>/Applications/anaconda/lib/python2.7/site-packages/ipykernel/__main__.py:2: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
@@ -8340,8 +7401,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAAENCAYAAABtgfzsAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnWd4FFUbhu/Zkk02m947oYQWSighNJEuSLMAiiKitE8R
@@ -8897,8 +7957,7 @@ RK5CYII=
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAAENCAYAAABtgfzsAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXd4VEXXwH/bk2x67wkEQmiB0DsCBqUJIkiRKlWaKCh8
@@ -9660,8 +8719,7 @@ Dx1OkwJkcc3GAAAAAElFTkSuQmCC
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[55]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[55]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>array([[-0.49729484, -0.50244517, -0.47367361, ..., -1.2316449 ,
          1.4322604 , -0.2734756 ],
@@ -9713,8 +8771,7 @@ Dx1OkwJkcc3GAAAAAElFTkSuQmCC
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>0.792717086835
 0.770308123249
@@ -9744,8 +8801,7 @@ The F1 score is: 0.730303030303
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[70]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[70]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>array([ 0.,  0.,  0.,  0.,  1.,  0.,  1.,  0.,  1.,  0.,  0.,  0.,  1.,
         0.,  1.,  1.,  0.,  0.,  1.,  1.,  0.,  0.,  1.,  0.,  0.,  0.,
@@ -9799,8 +8855,7 @@ The F1 score is: 0.730303030303
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[71]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[71]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -9891,664 +8946,562 @@ The F1 score is: 0.730303030303
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:   2%|▏         | 25/1275 [00:02<33:28,  1.61s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 1 - Current best internal CV score: 0.799677082422
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:   4%|▍         | 48/1275 [00:00<32:49,  1.60s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 2 - Current best internal CV score: 0.808901681353
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:   6%|▌         | 71/1275 [00:00<50:08,  2.50s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 3 - Current best internal CV score: 0.808901681353
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:   8%|▊         | 97/1275 [00:00<1:13:03,  3.72s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 4 - Current best internal CV score: 0.809810772262
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:   9%|▉         | 120/1275 [00:00<26:16,  1.37s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 5 - Current best internal CV score: 0.809810772262
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  12%|█▏        | 148/1275 [00:00<26:21,  1.40s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 6 - Current best internal CV score: 0.809810772262
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  14%|█▎        | 174/1275 [00:00<20:13,  1.10s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 7 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  16%|█▌        | 201/1275 [04:57<19:14,  1.07s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 8 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  18%|█▊        | 224/1275 [00:00<33:07,  1.89s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 9 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  19%|█▉        | 248/1275 [00:00<50:03,  2.92s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 10 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  21%|██▏       | 273/1275 [00:00<22:52,  1.37s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 11 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  23%|██▎       | 296/1275 [00:00<22:08,  1.36s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 12 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  25%|██▌       | 323/1275 [00:00<21:20,  1.34s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 13 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  27%|██▋       | 348/1275 [00:00<25:29,  1.65s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 14 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  29%|██▉       | 370/1275 [00:00<21:07,  1.40s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 15 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  31%|███       | 397/1275 [00:00<35:23,  2.42s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 16 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  33%|███▎      | 423/1275 [00:00<28:48,  2.03s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 17 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  35%|███▌      | 448/1275 [00:00<34:20,  2.49s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 18 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  37%|███▋      | 472/1275 [00:00<37:07,  2.77s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 19 - Current best internal CV score: 0.815118250005
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  39%|███▉      | 498/1275 [00:00<20:31,  1.58s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 20 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  41%|████      | 521/1275 [00:00<18:49,  1.50s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 21 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  43%|████▎     | 548/1275 [00:00<16:29,  1.36s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 22 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  45%|████▍     | 572/1275 [00:00<1:26:28,  7.38s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 23 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  47%|████▋     | 598/1275 [00:00<15:02,  1.33s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 24 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  49%|████▉     | 624/1275 [00:00<26:05,  2.40s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 25 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  51%|█████     | 649/1275 [00:00<16:41,  1.60s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 26 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  53%|█████▎    | 673/1275 [00:00<13:48,  1.38s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 27 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  55%|█████▍    | 697/1275 [00:00<13:21,  1.39s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 28 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  57%|█████▋    | 722/1275 [00:00<17:04,  1.85s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 29 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  59%|█████▊    | 749/1275 [00:00<11:53,  1.36s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 30 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  61%|██████    | 772/1275 [00:00<13:26,  1.60s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 31 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  63%|██████▎   | 798/1275 [00:00<12:27,  1.57s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 32 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  64%|██████▍   | 822/1275 [00:00<11:48,  1.56s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 33 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  66%|██████▋   | 847/1275 [00:00<28:53,  4.05s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 34 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  69%|██████▊   | 874/1275 [00:00<08:55,  1.34s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 35 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  71%|███████   | 899/1275 [00:00<08:14,  1.32s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 36 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  72%|███████▏  | 921/1275 [00:00<34:48,  5.90s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 37 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  74%|███████▍  | 948/1275 [00:00<07:24,  1.36s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 38 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  76%|███████▌  | 972/1275 [00:00<08:09,  1.62s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 39 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  78%|███████▊  | 1000/1275 [00:00<33:08,  7.23s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 40 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  80%|████████  | 1024/1275 [00:00<11:05,  2.65s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 41 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  82%|████████▏ | 1048/1275 [00:00<06:32,  1.73s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 42 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  84%|████████▍ | 1071/1275 [00:00<04:33,  1.34s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 43 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  86%|████████▌ | 1095/1275 [00:00<10:44,  3.58s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 44 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  88%|████████▊ | 1125/1275 [00:00<03:40,  1.47s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 45 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  90%|████████▉ | 1145/1275 [00:00<04:19,  2.00s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 46 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  92%|█████████▏| 1174/1275 [00:00<01:37,  1.04pipeline/s]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 47 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  94%|█████████▍| 1199/1275 [00:00<02:30,  1.98s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 48 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  96%|█████████▌| 1223/1275 [00:00<01:26,  1.66s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 49 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GP Progress:  98%|█████████▊| 1249/1275 [00:00<00:54,  2.10s/pipeline]</pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Generation 50 - Current best internal CV score: 0.815350163926
 </pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre></pre>
 </div>
 </div>
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Best pipeline: GradientBoostingClassifier(ZeroCount(StandardScaler(input_matrix)), 0.23999999999999999, 0.69000000000000006)
@@ -10572,8 +9525,7 @@ Best pipeline: GradientBoostingClassifier(ZeroCount(StandardScaler(input_matrix)
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt"></div>
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>0.959999041319
 </pre>
@@ -10620,8 +9572,7 @@ Best pipeline: GradientBoostingClassifier(ZeroCount(StandardScaler(input_matrix)
 </div>
 <div class="output_wrapper">
 <div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[79]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[79]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <table border="1" class="dataframe">
@@ -10686,7 +9637,6 @@ Best pipeline: GradientBoostingClassifier(ZeroCount(StandardScaler(input_matrix)
 </div>
 </div>
 </div>
-
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
