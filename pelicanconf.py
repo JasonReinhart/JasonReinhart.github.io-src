@@ -19,7 +19,7 @@ DEFAULT_LANG = u'en'
 LOAD_CONTENT_CACHE = False
 
 #Theme Settings
-THEME = "/Users/jreinhart/Documents/pelican_blog/pelican_themes/pelican-clean"
+THEME = "/Users/Reinhart/Documents/pelican_blog/pelican_themes/pelican-clean"
 MARKUP = ('md', 'ipynb')
 HEADER_COVER = "/assets/images/frontpageblur.jpg"
 
@@ -48,10 +48,9 @@ PAGE_SAVE_AS = '{slug}.html'
 #Pages on Menu navigation
 DISPLAY_PAGES_ON_MENU = False
 DISPLAY_CATEGORIES_ON_MENU = True
-MENUITEMS = (
-	('About', '/about.html'),
-	('Resumé', '/resume.html')
-	)
+MENUITEMS = [
+	('About', '/about.html')
+	]
 
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
